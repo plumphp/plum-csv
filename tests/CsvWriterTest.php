@@ -84,6 +84,7 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers Plum\PlumCsv\CsvWriter::writeItem()
+     * @covers Plum\PlumCsv\CsvWriter::verifyHandle()
      */
     public function writeItemThrowsAnExceptionIfNoFileHandleExists()
     {
@@ -101,6 +102,7 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers Plum\PlumCsv\CsvWriter::finish()
+     * @covers Plum\PlumCsv\CsvWriter::verifyHandle()
      */
     public function finishThrowsAnExceptionIfNoFileHandleExists()
     {
