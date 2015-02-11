@@ -1,7 +1,7 @@
 {
-  "name": "plum/plum-csv",
+  "name": "plumphp/plum-csv",
   "require": {
-    "plumphp/plum":       "dev-master"
+    "plumphp/plum": "dev-master@dev"
   },
   "require-dev": {
     "phpunit/phpunit":    "~4.3",
