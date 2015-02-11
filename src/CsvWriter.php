@@ -11,6 +11,7 @@
 
 namespace Plum\PlumCsv;
 
+use LogicException;
 use Plum\Plum\Writer\WriterInterface;
 
 /**
@@ -67,15 +68,13 @@ class CsvWriter implements WriterInterface
      * @param mixed $item
      *
      * @return void
+     *
+     * @throws LogicException if no valid handle exists.
      */
     public function writeItem($item)
     {
-        if (false === is_resource($this->fileHandle)) {
-            throw new \LogicException(sprintf(
-                'There exists no file handle for the file "%s". Please call prepare() before writing items.',
-                $this->filename
-            ));
-        }
+        $this->verifyHandle();
+
         $item = array_map(function ($v) {
             return $this->enclosure.$v.$this->enclosure;
         }, $item);
@@ -99,16 +98,27 @@ class CsvWriter implements WriterInterface
      * Finish the writer.
      *
      * @return void
+     *
+     * @throws LogicException if no valid handle exists.
      */
     public function finish()
     {
+        $this->verifyHandle();
+
+        fclose($this->fileHandle);
+    }
+
+    /**
+     * @throws LogicException if no valid handle exists.
+     */
+    protected function verifyHandle()
+    {
         if (false === is_resource($this->fileHandle)) {
-            throw new \LogicException(sprintf(
+            throw new LogicException(sprintf(
                 'There exists no file handle for the file "%s". For this instance of Plum\Plum\CsvWriter either'.
                 ' prepare() has never been called or finish() has already been called.',
                 $this->filename
             ));
         }
-        fclose($this->fileHandle);
     }
 }
