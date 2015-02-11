@@ -26,7 +26,8 @@ $ composer require plumphp/plum-csv:@stable
 Usage
 -----
 
-Please refer to the [Plum documentation](https://github.com/plumphp/plum/docs/index.md) for more information.
+Please refer to the [Plum documentation](https://github.com/plumphp/plum/blob/master/docs/index.md) for more 
+information.
 
 
 Change Log
