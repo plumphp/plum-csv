@@ -29,8 +29,10 @@ class CsvReader implements ReaderInterface
 
     /**
      * @param string $filePath Path to the csv file to read from
+     * @param string $delimiter The delimiter for the csv file
+     * @param string $enclosure The enclosure for the csv file
      */
-    public function __construct($filePath)
+    public function __construct($filePath, $delimiter=',', $enclosure='"')
     {
         if (!is_file($filePath)) {
             throw new LogicException(sprintf(
@@ -41,6 +43,8 @@ class CsvReader implements ReaderInterface
 
         $this->csv = Reader::createFromPath($filePath);
         $this->csv->setFlags(\SplFileObject::READ_AHEAD|\SplFileObject::SKIP_EMPTY);
+        $this->csv->setDelimiter($delimiter);
+        $this->csv->setEnclosure($enclosure);
     }
 
     /**

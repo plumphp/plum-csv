@@ -81,4 +81,36 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
     {
         new CsvReader(vfsStream::url('fixtures/notexisting.csv'));
     }
+
+    /**
+     * @test
+     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::getIterator()
+     */
+    public function getIteratorWithDifferentDelimiterInCsvFile()
+    {
+        file_put_contents(vfsStream::url('fixtures/bar.csv'), '1;2;3');
+        $reader = new CsvReader(vfsStream::url('fixtures/bar.csv'), ';');
+        $iterator = $reader->getIterator();
+        $iterator->next();
+        $row = $iterator->current();
+
+        $this->assertSame('1', $row[0]);
+    }
+
+    /**
+     * @test
+     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::getIterator()
+     */
+    public function getIteratorWithDifferentEnclosureInCsvFile()
+    {
+        file_put_contents(vfsStream::url('fixtures/bar.csv'), '|Hello, world|,key,value');
+        $reader = new CsvReader(vfsStream::url('fixtures/bar.csv'), ',', '|');
+        $iterator = $reader->getIterator();
+        $iterator->next();
+        $row = $iterator->current();
+
+        $this->assertSame('Hello, world', $row[0]);
+    }
 }
