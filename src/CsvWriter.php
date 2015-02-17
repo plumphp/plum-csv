@@ -38,6 +38,9 @@ class CsvWriter implements WriterInterface
     /** @var string[]|null */
     private $header;
 
+    /** @var bool */
+    private $autoDetectHeader = false;
+
     /**
      * @param string $filename
      * @param string $separator
@@ -63,6 +66,18 @@ class CsvWriter implements WriterInterface
     }
 
     /**
+     * @param bool $autoDetectHeader
+     *
+     * @return CsvWriter
+     */
+    public function autoDetectHeader($autoDetectHeader = true)
+    {
+        $this->autoDetectHeader = $autoDetectHeader;
+
+        return $this;
+    }
+
+    /**
      * Write the given item.
      *
      * @param mixed $item
@@ -74,6 +89,11 @@ class CsvWriter implements WriterInterface
     public function writeItem($item)
     {
         $this->verifyHandle();
+
+        if ($this->autoDetectHeader && !$this->header) {
+            $this->header = array_keys($item);
+            $this->writeItem($this->header);
+        }
 
         $item = array_map(function ($v) {
             return $this->enclosure.$v.$this->enclosure;

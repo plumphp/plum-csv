@@ -33,6 +33,7 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
      * @covers Plum\PlumCsv\CsvWriter::writeItem()
      * @covers Plum\PlumCsv\CsvWriter::prepare()
      * @covers Plum\PlumCsv\CsvWriter::finish()
+     * @covers Plum\PlumCsv\CsvWriter::verifyHandle()
      */
     public function writeItemWritesItemIntoFile()
     {
@@ -77,6 +78,27 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             "\"col 1\",\"col 2\",\"col 3\"\n\"val 1\",\"val 2\",\"val 3\"\n",
+            file_get_contents(vfsStream::url('fixtures/foo.csv'))
+        );
+    }
+
+    /**
+     * @test
+     * @covers Plum\PlumCsv\CsvWriter::autoDetectHeader()
+     * @covers Plum\PlumCsv\CsvWriter::writeItem()
+     * @covers Plum\PlumCsv\CsvWriter::prepare()
+     */
+    public function writeItemWritesHeaderIfAutoDetectIsEnabled()
+    {
+        $writer = new CsvWriter(vfsStream::url('fixtures/foo.csv'), ',', '"');
+        $writer->autoDetectHeader();
+        $writer->prepare();
+        $writer->writeItem(['col 1' => 'val 1a', 'col 2' => 'val 2a', 'col 3' => 'val 3a']);
+        $writer->writeItem(['col 1' => 'val 1b', 'col 2' => 'val 2b', 'col 3' => 'val 3b']);
+        $writer->finish();
+
+        $this->assertEquals(
+            "\"col 1\",\"col 2\",\"col 3\"\n\"val 1a\",\"val 2a\",\"val 3a\"\n\"val 1b\",\"val 2b\",\"val 3b\"\n",
             file_get_contents(vfsStream::url('fixtures/foo.csv'))
         );
     }
