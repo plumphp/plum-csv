@@ -34,7 +34,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::__construct()
      * @covers Plum\PlumCsv\CsvReader::getIterator()
      */
     public function getIteratorWithNormalCsvFile()
@@ -47,7 +47,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::__construct()
      * @covers Plum\PlumCsv\CsvReader::getIterator()
      */
     public function getIteratorContentWithNormalCsvFile()
@@ -62,7 +62,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::__construct()
      * @covers Plum\PlumCsv\CsvReader::count()
      */
     public function countWithNormalCsvFile()
@@ -74,7 +74,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::__construct()
      * @expectedException \LogicException
      */
     public function constructWithNotExistingFile()
@@ -84,7 +84,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::__construct()
      * @covers Plum\PlumCsv\CsvReader::getIterator()
      */
     public function getIteratorWithDifferentDelimiterInCsvFile()
@@ -100,7 +100,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @covers Plum\PlumCsv\CsvReader::__constuct()
+     * @covers Plum\PlumCsv\CsvReader::__construct()
      * @covers Plum\PlumCsv\CsvReader::getIterator()
      */
     public function getIteratorWithDifferentEnclosureInCsvFile()
