@@ -107,35 +107,25 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers Plum\PlumCsv\CsvWriter::writeItem()
      * @covers Plum\PlumCsv\CsvWriter::verifyHandle()
+     * @expectedException \LogicException
+     * @expectedExceptionMessage fixtures/foo.csv
      */
     public function writeItemThrowsAnExceptionIfNoFileHandleExists()
     {
         $writer = new CsvWriter(vfsStream::url('fixtures/foo.csv'));
-
-        try {
-            $writer->writeItem(['col 1', 'col 2', 'col 3']);
-            $this->assertTrue(false);
-        } catch (\LogicException $e) {
-            $this->assertTrue(true);
-            $this->assertRegExp('/fixtures\/foo\.csv/', $e->getMessage());
-        }
+        $writer->writeItem(['col 1', 'col 2', 'col 3']);
     }
 
     /**
      * @test
      * @covers Plum\PlumCsv\CsvWriter::finish()
      * @covers Plum\PlumCsv\CsvWriter::verifyHandle()
+     * @expectedException \LogicException
+     * @expectedExceptionMessage fixtures/foo.csv
      */
     public function finishThrowsAnExceptionIfNoFileHandleExists()
     {
         $writer = new CsvWriter(vfsStream::url('fixtures/foo.csv'));
-
-        try {
-            $writer->finish();
-            $this->assertTrue(false);
-        } catch (\LogicException $e) {
-            $this->assertTrue(true);
-            $this->assertRegExp('/fixtures\/foo\.csv/', $e->getMessage());
-        }
+        $writer->finish();
     }
 }
