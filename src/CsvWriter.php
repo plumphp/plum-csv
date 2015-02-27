@@ -31,7 +31,7 @@ class CsvWriter implements WriterInterface
     private $filename;
 
     /** @var string */
-    private $separator;
+    private $delimiter;
 
     /** @var string */
     private $enclosure;
@@ -44,13 +44,13 @@ class CsvWriter implements WriterInterface
 
     /**
      * @param string $filename
-     * @param string $separator
+     * @param string $delimiter
      * @param string $enclosure
      */
-    public function __construct($filename, $separator = ',', $enclosure = '"')
+    public function __construct($filename, $delimiter = ',', $enclosure = '"')
     {
         $this->filename  = $filename;
-        $this->separator = $separator;
+        $this->delimiter = $delimiter;
         $this->enclosure = $enclosure;
     }
 
@@ -107,7 +107,7 @@ class CsvWriter implements WriterInterface
     public function prepare()
     {
         $this->csv = Writer::createFromFileObject(new \SplFileObject($this->filename, 'w'));
-        $this->csv->setDelimiter($this->separator);
+        $this->csv->setDelimiter($this->delimiter);
         $this->csv->setEnclosure($this->enclosure);
 
         if ($this->header !== null) {
