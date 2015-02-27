@@ -11,6 +11,7 @@
 
 namespace Plum\PlumCsv;
 
+use League\Csv\Writer;
 use LogicException;
 use Plum\Plum\Writer\WriterInterface;
 
@@ -23,8 +24,8 @@ use Plum\Plum\Writer\WriterInterface;
  */
 class CsvWriter implements WriterInterface
 {
-    /** @var resource */
-    private $fileHandle;
+    /** @var \League\Csv\Writer */
+    private $csv;
 
     /** @var string */
     private $filename;
@@ -95,10 +96,7 @@ class CsvWriter implements WriterInterface
             $this->writeItem($this->header);
         }
 
-        $item = array_map(function ($v) {
-            return $this->enclosure.$v.$this->enclosure;
-        }, $item);
-        fwrite($this->fileHandle, implode($this->separator, $item)."\n");
+        $this->csv->insertOne($item);
     }
 
     /**
@@ -108,7 +106,10 @@ class CsvWriter implements WriterInterface
      */
     public function prepare()
     {
-        $this->fileHandle = fopen($this->filename, 'w');
+        $this->csv = Writer::createFromFileObject(new \SplFileObject($this->filename, 'w'));
+        $this->csv->setDelimiter($this->separator);
+        $this->csv->setEnclosure($this->enclosure);
+
         if ($this->header !== null) {
             $this->writeItem($this->header);
         }
@@ -125,7 +126,7 @@ class CsvWriter implements WriterInterface
     {
         $this->verifyHandle();
 
-        fclose($this->fileHandle);
+        unset($this->csv);
     }
 
     /**
@@ -133,7 +134,7 @@ class CsvWriter implements WriterInterface
      */
     protected function verifyHandle()
     {
-        if (false === is_resource($this->fileHandle)) {
+        if (!$this->csv instanceof Writer) {
             throw new LogicException(sprintf(
                 'There exists no file handle for the file "%s". For this instance of Plum\Plum\CsvWriter either'.
                 ' prepare() has never been called or finish() has already been called.',
