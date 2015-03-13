@@ -13,6 +13,7 @@ namespace Plum\PlumCsv;
 
 use org\bovigo\vfs\vfsStream;
 use Plum\Plum\Workflow;
+use Plum\Plum\Converter\HeaderConverter;
 
 /**
  * CsvHeaderConverterTest
@@ -36,7 +37,7 @@ class CsvTest extends \PHPUnit_Framework_TestCase
         );
 
         $reader = new CsvReader(vfsStream::url('fixtures/foo.csv'));
-        $converter = new CsvHeaderConverter();
+        $converter = new HeaderConverter();
         $writer = new CsvWriter(vfsStream::url('fixtures/bar.csv'));
 
         $workflow = new Workflow();
