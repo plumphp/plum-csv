@@ -36,7 +36,7 @@ class CsvReader implements ReaderInterface
     {
         if (!is_file($filePath)) {
             throw new LogicException(sprintf(
-                'There filePath %s does not exist. \Plum\PlumCsv\CsvReader needs an existing csv to work with',
+                'The file %s does not exist. \Plum\PlumCsv\CsvReader needs an existing csv to work with',
                 $filePath
             ));
         }
