@@ -17,23 +17,23 @@ Installation
 You can install Plum using [Composer](http://getcomposer.org).
 
 ```shell
-$ composer require plumphp/plum-csv:@stable
+$ composer require plumphp/plum-csv
 ```
-
-*Tip:* Replace `@stable` with a version from the [releases page](https://github.com/plumphp/plum-csv/releases).
 
 
 Usage
 -----
 
-Please refer to the [Plum documentation](https://github.com/plumphp/plum/blob/master/docs/index.md) for more 
+Please refer to the [Plum documentation](https://github.com/plumphp/plum/blob/master/docs/index.md) for more
 information.
 
 
 Change Log
 ----------
 
-*No version released.*
+### Version 0.1 (24 March 2015)
+
+- Initial release
 
 
 License
