@@ -9,7 +9,7 @@
   "license":     "MIT",
   "require":     {
     "php":          ">=5.4",
-    "plumphp/plum": "dev-master@dev",
+    "plumphp/plum": "~0.1",
     "league/csv":   "~6.3"
   },
   "require-dev": {
