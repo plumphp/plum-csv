@@ -1,8 +1,7 @@
 <img src="https://florian.ec/img/plum/logo.png" alt="Plum">
 ====
 
-> Plum is a data processing pipeline that helps you to write structured, reusable and well tested data processing code.
-> `plum-csv` includes readers and writers for CSV strings and files.
+> PlumCsv includes CSV readers and writers for Plum. Plum is a data processing pipeline for PHP.
 
 [![Build Status](https://travis-ci.org/plumphp/plum-csv.svg?branch=master)](https://travis-ci.org/plumphp/plum-csv)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/plumphp/plum-csv/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/plumphp/plum-csv/?branch=master)
