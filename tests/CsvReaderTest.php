@@ -113,4 +113,24 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('Hello, world', $row[0]);
     }
+
+    /**
+     * @test
+     * @covers Plum\PlumCsv\CsvReader::accepts()
+     */
+    public function acceptsReturnsTrueIfInputIsACsvFile()
+    {
+        $this->assertTrue(CsvReader::accepts('foo.csv'));
+        $this->assertTrue(CsvReader::accepts('foo.tsv'));
+    }
+
+    /**
+     * @test
+     * @covers Plum\PlumCsv\CsvReader::accepts()
+     */
+    public function acceptsReturnsFalseIfInputIsNotACsvFile()
+    {
+        $this->assertFalse(CsvReader::accepts('foo.xls'));
+        $this->assertFalse(CsvReader::accepts([]));
+    }
 }

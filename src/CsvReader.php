@@ -20,6 +20,7 @@ use Plum\Plum\Reader\ReaderInterface;
  *
  * @package   Plum\PlumCsv
  * @author    Sebastian Göttschkes <sebastian.goettschkes@googlemail.com>
+ * @author    Florian Eckerstorfer <florian@eckerstorfer.co>
  * @copyright 2015 Florian Eckerstorfer
  */
 class CsvReader implements ReaderInterface
@@ -28,7 +29,7 @@ class CsvReader implements ReaderInterface
     private $csv;
 
     /**
-     * @param string $filePath Path to the csv file to read from
+     * @param string $filePath  Path to the csv file to read from
      * @param string $delimiter The delimiter for the csv file
      * @param string $enclosure The enclosure for the csv file
      */
@@ -61,5 +62,15 @@ class CsvReader implements ReaderInterface
     public function getIterator()
     {
         return $this->csv->query();
+    }
+
+    /**
+     * @param mixed $input
+     *
+     * @return bool
+     */
+    public static function accepts($input)
+    {
+        return is_string($input) && preg_match('/\.(csv|tsv)$/', $input);
     }
 }
