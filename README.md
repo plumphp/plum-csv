@@ -30,6 +30,10 @@ information.
 Change Log
 ----------
 
+### Verison 0.3.1 (28 April 2015)
+
+- Fix Plum version
+
 ### Version 0.3 (22 April 2015)
 
 - Add support for ReaderFactory
