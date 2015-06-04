@@ -71,7 +71,10 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
     public function writeItemWritesItemWithHeaderIntoFile()
     {
         $writer = new CsvWriter(vfsStream::url('fixtures/foo.csv'), ',', '"');
-        $writer->setHeader(['col 1', 'col 2', 'col 3']);
+        $this->assertInstanceOf(
+            'Plum\PlumCsv\CsvWriter',
+            $writer->setHeader(['col 1', 'col 2', 'col 3'])
+        );
         $writer->prepare();
         $writer->writeItem(['val 1', 'val 2', 'val 3']);
         $writer->finish();
@@ -91,7 +94,10 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
     public function writeItemWritesHeaderIfAutoDetectIsEnabled()
     {
         $writer = new CsvWriter(vfsStream::url('fixtures/foo.csv'), ',', '"');
-        $writer->autoDetectHeader();
+        $this->assertInstanceOf(
+            'Plum\PlumCsv\CsvWriter',
+            $writer->autoDetectHeader()
+        );
         $writer->prepare();
         $writer->writeItem(['col 1' => 'val 1a', 'col 2' => 'val 2a', 'col 3' => 'val 3a']);
         $writer->writeItem(['col 1' => 'val 1b', 'col 2' => 'val 2b', 'col 3' => 'val 3b']);
@@ -99,6 +105,29 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             "\"col 1\",\"col 2\",\"col 3\"\n\"val 1a\",\"val 2a\",\"val 3a\"\n\"val 1b\",\"val 2b\",\"val 3b\"\n",
+            file_get_contents(vfsStream::url('fixtures/foo.csv'))
+        );
+    }
+
+    /**
+     * @test
+     * @covers Plum\PlumCsv\CsvWriter::autoDetectHeader()
+     * @covers Plum\PlumCsv\CsvWriter::writeItem()
+     * @covers Plum\PlumCsv\CsvWriter::prepare()
+     */
+    public function writeItemNotWritesHeaderIfAutoDetectIsEnabledButItemIsNotArray()
+    {
+        $writer = new CsvWriter(vfsStream::url('fixtures/foo.csv'), ',', '"');
+        $this->assertInstanceOf(
+            'Plum\PlumCsv\CsvWriter',
+            $writer->autoDetectHeader()
+        );
+        $writer->prepare();
+        $writer->writeItem('foobar');
+        $writer->finish();
+
+        $this->assertEquals(
+            "foobar\n",
             file_get_contents(vfsStream::url('fixtures/foo.csv'))
         );
     }
