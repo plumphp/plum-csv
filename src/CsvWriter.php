@@ -91,7 +91,7 @@ class CsvWriter implements WriterInterface
     {
         $this->verifyHandle();
 
-        if ($this->autoDetectHeader && !$this->header) {
+        if ($this->autoDetectHeader && !$this->header && is_array($item)) {
             $this->header = array_keys($item);
             $this->writeItem($this->header);
         }
