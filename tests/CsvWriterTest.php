@@ -14,9 +14,8 @@ namespace Plum\PlumCsv;
 use org\bovigo\vfs\vfsStream;
 
 /**
- * CsvWriterTest
+ * CsvWriterTest.
  *
- * @package   Plum\PlumCsv
  * @author    Florian Eckerstorfer <florian@eckerstorfer.co>
  * @copyright 2014 Florian Eckerstorfer
  * @group     unit
