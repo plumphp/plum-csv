@@ -8,6 +8,7 @@
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/c5u6y1hlt0g2g79n?svg=true)](https://ci.appveyor.com/project/florianeckerstorfer/plum-csv)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/plumphp/plum-csv/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/plumphp/plum-csv/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/plumphp/plum-csv/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/plumphp/plum-csv/?branch=master)
+[![StyleCI](https://styleci.io/repos/30266459/shield)](https://styleci.io/repos/30266459)
 
 Developed by [Florian Eckerstorfer](https://florian.ec) in Vienna, Europe.
 
