@@ -16,9 +16,8 @@ use LogicException;
 use Plum\Plum\Reader\ReaderInterface;
 
 /**
- * CsvReader
+ * CsvReader.
  *
- * @package   Plum\PlumCsv
  * @author    Sebastian Göttschkes <sebastian.goettschkes@googlemail.com>
  * @author    Florian Eckerstorfer <florian@eckerstorfer.co>
  * @copyright 2015 Florian Eckerstorfer
@@ -33,7 +32,7 @@ class CsvReader implements ReaderInterface
      * @param string $delimiter The delimiter for the csv file
      * @param string $enclosure The enclosure for the csv file
      */
-    public function __construct($filePath, $delimiter=',', $enclosure='"')
+    public function __construct($filePath, $delimiter = ',', $enclosure = '"')
     {
         if (!is_file($filePath)) {
             throw new LogicException(sprintf(
@@ -43,21 +42,21 @@ class CsvReader implements ReaderInterface
         }
 
         $this->csv = Reader::createFromPath($filePath);
-        $this->csv->setFlags(\SplFileObject::READ_AHEAD|\SplFileObject::SKIP_EMPTY);
+        $this->csv->setFlags(\SplFileObject::READ_AHEAD | \SplFileObject::SKIP_EMPTY);
         $this->csv->setDelimiter($delimiter);
         $this->csv->setEnclosure($enclosure);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function count()
     {
-        return sizeof($this->csv->fetchAll());
+        return count($this->csv->fetchAll());
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getIterator()
     {

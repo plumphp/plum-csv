@@ -14,9 +14,8 @@ namespace Plum\PlumCsv;
 use org\bovigo\vfs\vfsStream;
 
 /**
- * CsvWriterTest
+ * CsvWriterTest.
  *
- * @package   Plum\PlumCsv
  * @author    Sebastian Göttschkes <sebastian.goettschkes@googlemail.com>
  * @copyright 2015 Florian Eckerstorfer
  * @group     unit
@@ -39,7 +38,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function getIteratorWithNormalCsvFile()
     {
-        $reader = new CsvReader(vfsStream::url('fixtures/foo.csv'));
+        $reader   = new CsvReader(vfsStream::url('fixtures/foo.csv'));
         $iterator = $reader->getIterator();
 
         $this->assertInstanceOf('\Iterator', $iterator);
@@ -52,7 +51,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function getIteratorContentWithNormalCsvFile()
     {
-        $reader = new CsvReader(vfsStream::url('fixtures/foo.csv'));
+        $reader   = new CsvReader(vfsStream::url('fixtures/foo.csv'));
         $iterator = $reader->getIterator();
 
         foreach ($iterator as $item) {
@@ -90,7 +89,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
     public function getIteratorWithDifferentDelimiterInCsvFile()
     {
         file_put_contents(vfsStream::url('fixtures/bar.csv'), '1;2;3');
-        $reader = new CsvReader(vfsStream::url('fixtures/bar.csv'), ';');
+        $reader   = new CsvReader(vfsStream::url('fixtures/bar.csv'), ';');
         $iterator = $reader->getIterator();
         $iterator->next();
         $row = $iterator->current();
@@ -106,7 +105,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
     public function getIteratorWithDifferentEnclosureInCsvFile()
     {
         file_put_contents(vfsStream::url('fixtures/bar.csv'), '|Hello, world|,key,value');
-        $reader = new CsvReader(vfsStream::url('fixtures/bar.csv'), ',', '|');
+        $reader   = new CsvReader(vfsStream::url('fixtures/bar.csv'), ',', '|');
         $iterator = $reader->getIterator();
         $iterator->next();
         $row = $iterator->current();

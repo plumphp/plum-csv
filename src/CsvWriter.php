@@ -16,9 +16,8 @@ use LogicException;
 use Plum\Plum\Writer\WriterInterface;
 
 /**
- * CsvWriter
+ * CsvWriter.
  *
- * @package   Plum\PlumCsv
  * @author    Florian Eckerstorfer <florian@eckerstorfer.co>
  * @copyright 2014 Florian Eckerstorfer
  */
@@ -83,8 +82,6 @@ class CsvWriter implements WriterInterface
      *
      * @param mixed $item
      *
-     * @return void
-     *
      * @throws LogicException if no valid handle exists.
      */
     public function writeItem($item)
@@ -101,8 +98,6 @@ class CsvWriter implements WriterInterface
 
     /**
      * Prepare the writer.
-     *
-     * @return void
      */
     public function prepare()
     {
@@ -118,7 +113,6 @@ class CsvWriter implements WriterInterface
     /**
      * Finish the writer.
      *
-     * @return void
      *
      * @throws LogicException if no valid handle exists.
      */

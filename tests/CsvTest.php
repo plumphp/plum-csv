@@ -16,9 +16,8 @@ use Plum\Plum\Workflow;
 use Plum\Plum\Converter\HeaderConverter;
 
 /**
- * CsvHeaderConverterTest
+ * CsvHeaderConverterTest.
  *
- * @package   Plum\PlumCsv
  * @author    Sebastian Göttschkes <sebastian.goettschkes@googlemail.com>
  * @copyright 2015 Florian Eckerstorfer
  * @group     functional
@@ -36,9 +35,9 @@ class CsvTest extends \PHPUnit_Framework_TestCase
             ['foo.csv' => 'Test,Data,Column 3'."\n".'1,Something,Column 3'."\n".'2,Another Thing,Column 3'."\n"]
         );
 
-        $reader = new CsvReader(vfsStream::url('fixtures/foo.csv'));
+        $reader    = new CsvReader(vfsStream::url('fixtures/foo.csv'));
         $converter = new HeaderConverter();
-        $writer = new CsvWriter(vfsStream::url('fixtures/bar.csv'));
+        $writer    = new CsvWriter(vfsStream::url('fixtures/bar.csv'));
 
         $workflow = new Workflow();
         $workflow->addConverter($converter)->addWriter($writer);
