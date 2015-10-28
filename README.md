@@ -29,12 +29,12 @@ Usage
 Please refer to the [Plum documentation](https://github.com/plumphp/plum/blob/master/docs/index.md) for information
 about Plum in general.
 
-Currently PlumCsv contains a reader and a writer for CSV files.
+Currently PlumCsv contains a reader and a writer for CSV files and uses 
+[League\CSV](https://github.com/thephpleague/csv) to actually read and write CSV files.
 
 ### `CsvReader`
 
-You can use the `Plum\PlumCsv\CsvReader` to read data from a `.csv` file. PlumCsv uses
-[League\CSV](https://github.com/thephpleague/csv) to actually read the CSV files.
+You can use the `Plum\PlumCsv\CsvReader` to read data from a `.csv` file.
 
 ```php
 use Plum\PlumCsv\CsvReader;
