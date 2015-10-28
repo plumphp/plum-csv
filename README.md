@@ -92,12 +92,28 @@ $writer = new CsvWriter('foobar.csv');
 $writer->autoDetectHeader(); // Must be called before the first `writeItem()`
 ```
 
+If you need to further configure the writer, you can inject an instance of `League\Csv\Writer` to 
+`Plum\PlumCsv\CsvWriter`.
+
+```php
+use Plum\PlumCsv\CsvWriter;
+use League\Csv\Writer;
+
+$csv = Writer::createFromFileObject(new SplFileObject('countries.csv', 'w'));
+$csv->setNullHandlingMode(Writer::NULL_AS_EMPTY);
+$writer = new CsvWriter($csv);
+```
 
 
 Change Log
 ----------
 
-### Verison 0.3.1 (28 April 2015)
+### Version 0.4 (28 October 2015)
+
+- Check if item is array before auto-setting header
+- [#10](https://github.com/plumphp/plum-csv/pull/10) Allow injection of `League\Csv\Writer`
+
+### Version 0.3.1 (28 April 2015)
 
 - Fix Plum version
 
