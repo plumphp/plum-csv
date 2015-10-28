@@ -14,6 +14,7 @@ namespace Plum\PlumCsv;
 use League\Csv\Writer;
 use LogicException;
 use Plum\Plum\Writer\WriterInterface;
+use SplFileObject;
 
 /**
  * CsvWriter.
@@ -48,7 +49,11 @@ class CsvWriter implements WriterInterface
      */
     public function __construct($filename, $delimiter = ',', $enclosure = '"')
     {
-        $this->filename  = $filename;
+        if ($filename instanceof Writer) {
+            $this->csv = $filename;
+        } else {
+            $this->filename = $filename;
+        }
         $this->delimiter = $delimiter;
         $this->enclosure = $enclosure;
     }
@@ -101,9 +106,11 @@ class CsvWriter implements WriterInterface
      */
     public function prepare()
     {
-        $this->csv = Writer::createFromFileObject(new \SplFileObject($this->filename, 'w'));
-        $this->csv->setDelimiter($this->delimiter);
-        $this->csv->setEnclosure($this->enclosure);
+        if (!$this->csv) {
+            $this->csv = Writer::createFromFileObject(new SplFileObject($this->filename, 'w'));
+            $this->csv->setDelimiter($this->delimiter);
+            $this->csv->setEnclosure($this->enclosure);
+        }
 
         if ($this->header !== null) {
             $this->writeItem($this->header);
