@@ -169,7 +169,7 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
      */
     public function writeItemWritesItemIntoFileInjectingWriter()
     {
-        $csv = Writer::createFromFileObject(new SplFileObject(vfsStream::url('fixtures/foo.csv'), 'w'));
+        $csv    = Writer::createFromFileObject(new SplFileObject(vfsStream::url('fixtures/foo.csv'), 'w'));
         $writer = new CsvWriter($csv);
         $writer->prepare();
         $writer->writeItem(['col 1', 'col 2', 'col 3']);
