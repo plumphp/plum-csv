@@ -11,7 +11,9 @@
 
 namespace Plum\PlumCsv;
 
+use League\Csv\Writer;
 use org\bovigo\vfs\vfsStream;
+use SplFileObject;
 
 /**
  * CsvWriterTest.
@@ -155,5 +157,24 @@ class CsvWriterTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new CsvWriter(vfsStream::url('fixtures/foo.csv'));
         $writer->finish();
+    }
+
+    /**
+     * @test
+     * @covers Plum\PlumCsv\CsvWriter::__construct()
+     * @covers Plum\PlumCsv\CsvWriter::writeItem()
+     * @covers Plum\PlumCsv\CsvWriter::prepare()
+     * @covers Plum\PlumCsv\CsvWriter::finish()
+     * @covers Plum\PlumCsv\CsvWriter::verifyHandle()
+     */
+    public function writeItemWritesItemIntoFileInjectingWriter()
+    {
+        $csv    = Writer::createFromFileObject(new SplFileObject(vfsStream::url('fixtures/foo.csv'), 'w'));
+        $writer = new CsvWriter($csv);
+        $writer->prepare();
+        $writer->writeItem(['col 1', 'col 2', 'col 3']);
+        $writer->finish();
+
+        $this->assertEquals("\"col 1\",\"col 2\",\"col 3\"\n", file_get_contents(vfsStream::url('fixtures/foo.csv')));
     }
 }
